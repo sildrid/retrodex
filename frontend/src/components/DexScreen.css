@@ -1,0 +1,12 @@
+.dex-screen{
+  background-color: var(--lcd-w);
+  color: var(--lcd-b);
+  text-shadow: 0 0 2px var(--reflection);
+  font-family: "Press Start 2P";
+  flex-grow: 100;
+  padding: .3rem;
+  border-radius: 8px;
+  border: inset .4rem var(--dex);
+  overflow-y: scroll;
+  overflow-x: hidden;
+}

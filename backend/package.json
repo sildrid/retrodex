@@ -1,0 +1,15 @@
+{
+  "name": "backend_v2",
+  "version": "1.0.0",
+  "description": "pokeapi backend for my dex usecase, this will just cache the most important information, then make api calls with the most detailed info",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "test"
+  },
+  "author": "silver",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

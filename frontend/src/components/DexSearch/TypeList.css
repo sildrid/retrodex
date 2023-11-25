@@ -1,0 +1,38 @@
+.type-list{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 0;
+  justify-content: space-evenly;
+}
+.type-list li{
+  padding: .3rem 0;
+  box-shadow: 1px 1px 3px var(--shadow);
+  border-radius: 0.5rem;
+  text-transform: capitalize;
+  transition: .1s;
+  width: 45%;
+  text-align: center;
+}
+.type-list li:hover{
+  transform: scale(1.05);
+}
+.type-list li:active{
+  color: var(--lcd-w);
+  background-color: var(--lcd-b);
+}
+.type-list div ul{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  border: 1px inset var(--shadow);
+  gap: .5rem 0;
+  padding-bottom: .3rem;
+  margin: .3rem;
+  border-radius: .5rem;
+}
+.type-list div h4{
+  margin-top: 0.3rem;
+  font-size: 0.7rem;
+  width: 100%;
+}
+

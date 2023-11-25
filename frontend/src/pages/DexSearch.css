@@ -1,0 +1,125 @@
+/* colors */
+.dex-search-form{
+  background-color: var(--lcd-w);
+}
+
+.search-options input:checked + label{
+  color: var(--lcd-w);
+  background-color: var(--lcd-b);
+}
+
+/* margins and paddings */
+.dex-search-form,
+.dex-search-moves li{
+  padding: .5rem;
+}
+.search-options label{
+  padding: .5rem 0;
+}
+.dex-search-form{
+  margin-bottom: .5rem;
+}
+
+/* borders and shadows */
+.dex-search-form,
+.search-options label,
+.dex-search-moves li{
+  box-shadow: 1px 1px 3px var(--shadow);
+}
+.dex-search-moves li{
+  border-radius: 0.5rem;
+}
+
+
+/* --------------------- */
+
+.dex-search-form{
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+.search-options{
+  display: flex;
+  justify-content: space-between;
+}
+.search-options input{
+  display: none;
+}
+.search-options label{
+  transition: 0.1s;
+  font-size:0.85rem;
+  text-align: center;
+  width: 24%;
+}
+/*-------------------------------*/
+
+
+  .img-loaded.img-loaded{
+  transform: scale(1);
+}
+
+.dex-search-moves div{
+  text-transform: capitalize;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.dex-search-moves div div{
+  flex-direction: column;
+}
+.dex-search-moves li{
+  margin: .5rem;
+}
+.dex-search-moves li img{
+  width: 3rem;
+}
+.dex-search-moves li p{
+  font-size: 0.8rem;
+}
+.dex-search-moves h3{
+  text-transform: capitalize;
+}
+
+
+.search-input input{
+  margin: 0.5rem 0;
+  border-radius: 2rem;
+  border: none;
+  padding: .5rem;
+  box-shadow: 1px 1px 3px var(--shadow);
+  width: 100%;
+  text-align: center;
+  }
+.search-input input:focus{
+  outline: var(--shadow) solid 3px;
+
+}
+.search-input ul{
+  text-transform: capitalize;
+  margin: .5rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+.search-input li{
+  margin: .5rem .2rem;
+}
+.search-input label{
+  text-align: center;
+  display: block;
+  padding: .3rem 0;
+  min-width: 4.5rem;
+  box-shadow: 1px 1px 3px var(--shadow);
+  border-radius: .8rem;
+}
+.search-input input[type=checkbox], .search-input input[type=radio]{
+  display: none;
+}
+.search-input input:checked + label{
+  outline: var(--shadow) solid 3px; 
+  color: var(--reflection);
+  transform: scale(1.1);
+}
+.advanced-button-wrapper label{
+  padding: .3rem .5rem;
+}

@@ -1,0 +1,11 @@
+.dex-title{
+  display: flex;
+}
+.dex-title h1{
+  font-size: 2rem;
+  font-weight: 900;
+  text-shadow: 2px 4px 4px var(--shadow);
+}
+.dex-title img{
+  filter: drop-shadow(2px 4px 4px var(--shadow));
+}

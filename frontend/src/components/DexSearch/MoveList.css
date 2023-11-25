@@ -1,0 +1,29 @@
+.moves-list{
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  gap: .5rem 0;
+}
+.moves-list li{
+  border-radius: .5rem;
+  width: 48%;
+  box-shadow: 1px 1px 3px var(--shadow);
+  padding: .2rem;
+}
+.moves-list h4{
+  text-align: center;
+  text-transform: capitalize;
+  font-size: 1.2rem;
+}
+.moves-list div{
+  display: flex;
+  align-items: center;
+}
+.moves-list p{
+  font-size: .9rem;
+  padding: .2rem;
+  border: 1px inset var(--shadow);
+}
+.moves-list img{
+  width: 25%;
+}
