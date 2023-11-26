@@ -13,6 +13,18 @@ app.use(function(req, res, next) {
 });
 
 
+// routes
+app.get("/api/data", (req,res)=>{
+  res.json(dexInfo);
+});
+app.get("/api/pokemon", (req,res)=>{
+  res.json(dexInfo.pokemon);
+});
+app.get("/api/types", (req,res)=>{
+  res.json(dexInfo.types);
+});
+
+
 // dex data builder
 
 let dexInfo = {
@@ -20,29 +32,21 @@ let dexInfo = {
 };
 const buildData = async ()=>{
   try{
-    console.log("building pokedex data...")
+    console.log("Building pokedex data...");
     dexInfo = await dexCompiler();
+
+    // server start
+
+    app.listen(port, ()=>{
+      console.log(`Server listening on port ${port}...`);
+    })
   }
   catch(err){
-    console.log("failed to build pokedex data", err);
+    console.log("Failed to build pokedex data", err);
   }
 }
+
+
+// launch server
+
 buildData();
-
-// routes
-app.get("/api/data", (req,res) =>{
-  res.json(dexInfo);
-});
-app.get("/api/pokemon", (req,res) =>{
-  res.json(dexInfo.pokemon);
-})
-app.get("/api/types", (req,res) =>{
-  res.json(dexInfo.types)
-})
-
-
-// server start
-
-app.listen(port, () =>{
-  console.log(`server listening on port ${port}...`);
-})
