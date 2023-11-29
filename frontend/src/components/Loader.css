@@ -1,0 +1,52 @@
+.loader{
+  position: fixed;
+  inset:0;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.loader div{
+  position: absolute;
+  transition: 1s;
+  border: .4rem outset var(--dex);
+  width: 49.5%;
+  height: 49.5%;
+  background-color: var(--dex);
+}
+.loader .top{
+  top: 0;
+}
+.loader .bottom{
+  bottom: 0;
+}
+.loader .left{
+  left: 0;
+}
+.loader .right{
+  right: 0;
+}
+.loader.loaded .top{
+  top: -50%;
+}
+.loader.loaded .bottom{
+  bottom: -50%;
+}
+.loader.loaded .left{
+  left: -50%;
+}
+.loader.loaded .right{
+  right: -50%;
+}
+.loader .lens{
+  background: radial-gradient(circle at 30% 30%, var(--reflection), var(--lens) 20%);
+  border: .4rem outset var(--shadow);
+  position: relative;
+  border-radius: 50%;
+  width: 30vmin;
+  height: auto;
+  aspect-ratio: 1;
+}
+.loader.loaded .lens{
+  transform: scale(0);
+}

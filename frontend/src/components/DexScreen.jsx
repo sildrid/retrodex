@@ -5,28 +5,46 @@ import './DexScreen.css';
 import NotFound from '../pages/NotFound.jsx';
 import DexSearch from '../pages/DexSearch.jsx';
 import PokeInfo from '../pages/PokeInfo.jsx';
+import Loader from '../components/Loader.jsx';
+
+import fetcher from '../modules/fetcher.js';
 
 export default function(){
-  const [dexData, setDexData] = useState({pokemon:[], types:[], abilities:[]});
+  const [dexData, setDexData] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [dataError, setDataError] = useState(false);
   useEffect(()=>{
     const getDexData = async ()=>{
-      const response = await fetch('http://localhost:8000/api/data');
-      const data = await response.json();
-      setDexData(data);
-      console.log("fetched")
+      const data = await fetcher('http://localhost:8000/api/data');
+      if(Object.keys(data).length>0){
+        console.log(data);
+        setDexData(data);
+      }else{
+        setDataError(true);
+      }
+      setLoading(false);
     }
     getDexData();
   },[]);
 
   return(
     <main className="dex-screen">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/search" element={<DexSearch data={dexData}/>}/>
-          <Route path="/pokemon/:id" element={<PokeInfo/>}/>
-          <Route path="*" element={<NotFound/>} />
-        </Routes>
-      </BrowserRouter>
+      {!dataError &&
+        <BrowserRouter>
+          <Routes>
+            <Route path="/search" element={<DexSearch data={dexData}/>}/>
+            <Route path="/pokemon/:id" element={<NotFound/>}/>
+            <Route path="*" element={<NotFound/>} />
+          </Routes>
+        </BrowserRouter>
+      }
+      {dataError &&
+        <>
+        <h3>Server Error:</h3>
+        <p>Please come back later.</p>
+        </>
+      }
+      <Loader loading={loading}/>
     </main>
   )
 }

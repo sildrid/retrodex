@@ -19,37 +19,40 @@ export default function(props){
   const [moveSearchCategory, setMoveSearchCategory] = useState("");
 
   useEffect(()=>{
-    setFilterMon(props.data.pokemon);
-    setFilterTypes(props.data.types);
-    setFilterAbilities(props.data.abilities);
-  },[props.data]);
-  useEffect(()=>{
-    const filteredMoveTypes = moveSearchTypes.length>0?
-      props.data.types.filter(n=>{
-        return moveSearchTypes.find(x=>x===n.name);
-      }):
-      [...props.data.types];
-    
-    const filteredMoveCategories = moveSearchCategory ?
-    filteredMoveTypes.map(type=>{
-      const updatedType = {...type};
-      updatedType.moves = type.moves.filter(mov=>mov.class==moveSearchCategory);
-      return updatedType
-    }):
-    filteredMoveTypes.map(type=>{
-      const updatedType = {...type};
-      updatedType.moves = [...type.moves]
-      return updatedType
-    });
-    
-    if(moveSearchName){
-      filteredMoveCategories.forEach(type=>{
-         type.moves = type.moves.filter(mov=>mov.name.includes(moveSearchName.toLowerCase()));
-      });
-    }
+    setFilterMon(props.data.pokemon || []);
+    setFilterTypes(props.data.types || []);
+    setFilterAbilities(props.data.abilities || []);
+  }, [props.data]);
 
-    setFilterTypes(filteredMoveCategories);
-  },[moveSearchName,moveSearchTypes,moveSearchCategory]);
+  useEffect(()=>{
+    if(props.data.types){
+      const filteredMoveTypes = moveSearchTypes.length>0?
+        props.data.types.filter(n=>{
+          return moveSearchTypes.find(x=>x===n.name);
+        }):
+        [...props.data.types];
+
+      const filteredMoveCategories = moveSearchCategory ?
+        filteredMoveTypes.map(type=>{
+          const updatedType = {...type};
+          updatedType.moves = type.moves.filter(mov=>mov.class==moveSearchCategory);
+          return updatedType
+        }):
+        filteredMoveTypes.map(type=>{
+          const updatedType = {...type};
+          updatedType.moves = [...type.moves]
+          return updatedType
+        });
+
+      if(moveSearchName){
+        filteredMoveCategories.forEach(type=>{
+          type.moves = type.moves.filter(mov=>mov.name.includes(moveSearchName.toLowerCase()));
+        });
+      }
+      setFilterTypes(filteredMoveCategories);
+    }
+  }, [moveSearchName,moveSearchTypes,moveSearchCategory]);
+
   const setOption = (e)=>{
     setSearchOption(e.target.value);
   }
