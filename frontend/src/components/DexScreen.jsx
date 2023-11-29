@@ -4,6 +4,7 @@ import {useState, useEffect} from 'react';
 import './DexScreen.css';
 import NotFound from '../pages/NotFound.jsx';
 import DexSearch from '../pages/DexSearch.jsx';
+import PokeInfo from '../pages/PokeInfo.jsx';
 
 export default function(){
   const [dexData, setDexData] = useState({pokemon:[], types:[], abilities:[]});
@@ -22,6 +23,7 @@ export default function(){
       <BrowserRouter>
         <Routes>
           <Route path="/search" element={<DexSearch data={dexData}/>}/>
+          <Route path="/pokemon/:id" element={<PokeInfo/>}/>
           <Route path="*" element={<NotFound/>} />
         </Routes>
       </BrowserRouter>

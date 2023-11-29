@@ -1,10 +1,12 @@
+import {useNavigate} from 'react-router-dom';
 import './MonList.css';
 export default function(props){
+  const navigate = useNavigate();
   return(
     <ul className="mon-list">
       {props.list.map(mon=>{
         return(
-          <li key={"mon"+mon.id}>
+          <li key={"mon"+mon.id} onClick={()=>{navigate(`/pokemon/${mon.name}`)}}>
             <h4>nº{mon.id<1000?mon.id:"-"}</h4>
             <img
               loading="lazy"

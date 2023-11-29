@@ -5,7 +5,7 @@ const drawProgress = (current,max)=>{
   const barSize = Math.floor(pct/5);
   process.stdout.moveCursor(0,-1);
   process.stdout.clearLine(1);
-  console.log(`[${"*".repeat(barSize) + " ".repeat(20 - barSize)}] ${Math.floor(pct)}%`);
+  console.log(`[${"*".repeat(barSize) + " ".repeat(20 - barSize)}] ${pct}%`);
 }
 
 const fetcher = async (url, retries)=>{
