@@ -86,16 +86,15 @@ export default function(props){
   return(
     <>
       <form className="dex-search-form">  
-        <h3>Search:</h3>
         <div className="search-options">
           <input
-            id="search-by-name"
+            id="search-by-pokemon"
             name="search-by"
             type="radio" value="name"
             onChange={setOption}
             defaultChecked
           />
-          <label htmlFor="search-by-name">Name/Nº</label>
+          <label htmlFor="search-by-pokemon">Poké</label>
           <input
             id="search-by-type"
             name="search-by"
@@ -122,11 +121,17 @@ export default function(props){
         </div>
         <div className="search-input">
           {(searchOption === "name" &&
-            <input type="text" placeholder="search by name or number" onChange={monInputFilter}/>
+            <label className="search-field">
+              <p>&#128270;</p>
+              <input type="text" placeholder="search by name or number" onChange={monInputFilter}/>
+            </label>
           )}
           {(searchOption === "move" &&
             <div>
+              <label className="search-field">
+              <p>&#128270;</p>
               <input type="text" placeholder="search a move" onChange={moveInputFilter}/>
+              </label>
               <ul className="advanced-button-wrapper">
                 <li>
                   <input id="advanced-toggle" type="checkbox" onChange={(e)=>{setAdvancedOption(e.target.checked)}}/>
@@ -203,7 +208,10 @@ export default function(props){
             </div>
           )}
           {(searchOption === "ability" &&
-            <input type="text" placeholder="search an ability" onChange={abilityInputFilter}/>
+            <label className="search-field">
+              <p>&#128270;</p>
+              <input type="text" placeholder="search an ability" onChange={abilityInputFilter}/>
+            </label>
           )}
         </div>
       </form>

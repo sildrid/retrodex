@@ -1,12 +1,16 @@
 .dex-screen{
-  background-color: var(--lcd-w);
+  background:
+    linear-gradient(0deg, var(--lcd-w), transparent .5rem),
+    linear-gradient(90deg, var(--lcd-b), transparent .5rem),
+    linear-gradient(180deg, var(--lcd-b), transparent .5rem),
+    linear-gradient(270deg, var(--lcd-w), transparent .5rem),
+    var(--lcd-w);
   color: var(--lcd-b);
   text-shadow: 0 0 2px var(--reflection);
   font-family: "Press Start 2P";
   flex-grow: 100;
-  padding: .3rem;
+  padding: .5rem;
   border-radius: 8px;
-  border: inset .4rem var(--dex);
   overflow-y: scroll;
   overflow-x: hidden;
 }

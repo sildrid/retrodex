@@ -2,6 +2,7 @@ import {BrowserRouter,Routes,Route} from 'react-router-dom';
 import {useState, useEffect} from 'react';
 
 import './DexScreen.css';
+import ServerError from '../pages/ServerError.jsx';
 import NotFound from '../pages/NotFound.jsx';
 import DexSearch from '../pages/DexSearch.jsx';
 import PokeInfo from '../pages/PokeInfo.jsx';
@@ -39,10 +40,7 @@ export default function(){
         </BrowserRouter>
       }
       {dataError &&
-        <>
-        <h3>Server Error:</h3>
-        <p>Please come back later.</p>
-        </>
+        <ServerError/>
       }
       <Loader loading={loading}/>
     </main>

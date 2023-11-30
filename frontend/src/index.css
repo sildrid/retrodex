@@ -4,6 +4,8 @@
   --shadow: #000d;
   --lens: #2a5ddf;
   --dex: #961515;
+  --dex-light: #aa3030;
+  --dex-shadow: #850505;
   --lcd-b: #222222;
   --lcd-w: #d9d9d9;
 }
@@ -20,7 +22,13 @@ html, body, #root{
   height: 100%;
 }
 body{
-  background-color: var(--dex);
+  background:
+    linear-gradient(0deg, var(--lcd-b), transparent .5rem),
+    linear-gradient(90deg, var(--lcd-w), transparent .5rem),
+    linear-gradient(180deg, var(--lcd-w), transparent .5rem),
+    linear-gradient(270deg, var(--lcd-b), transparent .5rem),
+    linear-gradient(-45deg, var(--dex-shadow), var(--dex-light));
+  border: .2rem outset var(--lcd-b);
   color: var(--reflection);
   font-family: "Noto Sans";
   padding: 1rem 0.5rem;
