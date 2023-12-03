@@ -3,23 +3,22 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  position: relative;
-  z-index: 100;
+  gap: 2rem;
+  text-align: center;
   text-shadow: 1px 1px 1px var(--reflection),-1px -1px 1px var(--reflection);
 }
-.not-found:before{
-  content: "";
-  background-image: url('pokeball.png');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-  width: 25%;
-  aspect-ratio: 1;
-  position: absolute;
-  z-index:-1;
-  animation: rotate 2s linear infinite;
-  filter: grayscale(50%) blur(2px);
+.not-found h2{
+  font-size: 6rem;
+}
+.not-found h2 img{
+  height: 6rem;
+  margin-right: .5rem;
+  animation: rotate .8s linear infinite;
+}
+.not-found .not-found-image{
+  height: 12rem;
+  align-self: center;
+  filter: drop-shadow(4px 4px var(--lcd-b));
 }
 @keyframes rotate{
   from{

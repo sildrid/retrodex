@@ -4,8 +4,8 @@
   "description": "pokeapi backend for my dex usecase, this will just cache the most important information, then make api calls with the most detailed info",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
-    "test": "test"
+    "start": "node index.js",
+    "test": "nodemon index.js"
   },
   "author": "silver",
   "license": "ISC",

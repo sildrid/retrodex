@@ -1,6 +1,9 @@
 import {useState, useEffect} from 'react';
 import {useParams, useNavigate} from 'react-router-dom';
 import './PokeInfo.css';
+import fetcher from '../modules/fetcher.js';
+import Evolution from '../components/PokeInfo/Evolution.jsx';
+
 export default function(props){
   const navigate = useNavigate();
   const {id} = useParams()
@@ -11,18 +14,11 @@ export default function(props){
   useEffect(()=>{
     const getPokeData = async ()=>{
       try{
-        const resMon = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
-        const dataMon = await resMon.json();
+        const dataMon = await fetcher(`https://pokeapi.co/api/v2/pokemon/${id}`);
         setMonData(dataMon);
-        console.log(dataMon);
-        const resSpecies = await fetch(dataMon.species.url);
-        const dataSpecies = await resSpecies.json();
+        const dataSpecies = await fetcher(dataMon.species.url);
         setSpeciesData(dataSpecies);
-        console.log(dataSpecies);
-        const resEvo = await fetch(dataSpecies.evolution_chain.url);
-        const dataEvo = await resEvo.json();
-        console.log(dataEvo);
-        console.log(dataEvo.chain.evolves_to[0].species.name)
+        const dataEvo = await fetcher(dataSpecies.evolution_chain.url);
         setEvoData(dataEvo);
       }
       catch(err){
@@ -32,13 +28,6 @@ export default function(props){
     getPokeData();
   },[]);
   const urlPattern = /(?<=\/)\d+(?=\/$)/
-
-  const evolutionTree = (data)=>{
-    return(
-      <li>asd</li>
-    )
-  }
-
 
 
   return(
@@ -51,7 +40,7 @@ export default function(props){
         <ul>
           <li>
             <input id="info-forms" name="poke-info-window" type="radio" defaultChecked/>
-            <label htmlFor="info-forms">Forms</label>
+            <label htmlFor="info-forms">Species</label>
           </li>
           <li>
             <input id="info-builder" name="poke-info-window" type="radio"/>
@@ -67,39 +56,7 @@ export default function(props){
           </li>
         </ul>
       </nav>
-      <div>
-        <div>
-          <h3>Forms</h3>
-          <ul>
-            {speciesData.varieties && speciesData.varieties.length>1 && speciesData.varieties.map(n=>{
-              const varId = n.pokemon.url.match(urlPattern)[0];
-              return(
-                <li key={n.pokemon.name} className={n.pokemon.name==monData.name?"active-mon":""}>
-                  <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${varId}.png`}/>
-                  {n.pokemon.name.split("-").join(" ")}
-                </li>
-              )
-            })}
-          </ul>
-        </div>
-        <div>
-          <h3>evolutions</h3>
-          <ul>
-            {evoData.chain &&
-              (<>
-                <li>{evoData.chain.species.name}</li>
-                {evoData.chain.evolves_to.map(n=>{
-                  console.log(n)
-                  return (<li>meh</li>)
-                })}
-              </>)
-              
-            }
-            {evolutionTree([evoData.chain])}
-          </ul>
-
-        </div>
-      </div>
+      <Evolution species={speciesData} evolution={evoData}/>
       <ul>weak to</ul>
       <ul>resist</ul>
       <ul>abilities</ul>

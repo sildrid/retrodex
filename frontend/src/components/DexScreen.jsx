@@ -18,7 +18,6 @@ export default function(){
     const getDexData = async ()=>{
       const data = await fetcher('http://localhost:8000/api/data');
       if(Object.keys(data).length>0){
-        console.log(data);
         setDexData(data);
       }else{
         setDataError(true);
@@ -34,7 +33,7 @@ export default function(){
         <BrowserRouter>
           <Routes>
             <Route path="/search" element={<DexSearch data={dexData}/>}/>
-            <Route path="/pokemon/:id" element={<NotFound/>}/>
+            <Route path="/pokemon/:id" element={<PokeInfo/>}/>
             <Route path="*" element={<NotFound/>} />
           </Routes>
         </BrowserRouter>

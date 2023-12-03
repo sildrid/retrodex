@@ -1,0 +1,42 @@
+.evo-list.evo-list{
+  display: block;
+  width: 100%;
+}
+.evo-list.evo-list h3, .evo-list.evo-list ul, .evo-list.evo-list li{
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+.evo-list.evo-list div{
+  box-shadow: 0 0 1px green;
+  align-self: center;
+  text-transform: capitalize;
+}
+.evo-list.evo-list div div{
+  background-color: red;
+  display: flex;
+  justify-content: center;
+  font-size: .6rem;
+}
+.evo-list.evo-list div div div{
+  width: 50%;
+}
+.evo-list.evo-list img{
+  width: 4rem;
+}
+.evo-list.evo-list h3{
+  font-size: .8rem;
+  text-transform: capitalize;
+  width: 9rem;
+  margin: 0 auto;
+}
+.evo-list.evo-list ul{
+  display: block;
+  box-shadow: 0 0 1px red;
+}
+.evo-list.evo-list li{
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  box-shadow: 0 0 1px blue;
+}
