@@ -1,28 +1,134 @@
-import {useEffect} from 'react';
+import {useNavigate} from 'react-router-dom';
 import './Evolution.css';
 
-export default function({species, evolution, name}){
-
+export default function({evolution}){
+  const navigate = useNavigate();
+  const clearText = (txt)=>{
+    return txt.replace(/[-_]/g," ");
+  }
   const evoDetails = (info)=>{
-    const txt = info.trigger.name.replace(/-/g," ");
-    return txt
+    const requirements = Object.keys(info).filter(key=>{
+      if(info[key] && key!="trigger"){
+        return true;
+      }else{
+        return false;
+      }
+    })
+    switch(info.trigger.name){
+      case "level-up":
+        return(
+          <div>
+            <p>Lv Up</p>
+            {requirements.map(n=>{
+              switch(n){
+                case "min_level":
+                  return <p>Lv{info.min_level}+</p>
+                break;
+                case "min_happiness":
+                case "min_affection":
+                  return (
+                    <p>
+                      happy<br/>
+                      <img
+                        className="evo-item"
+                        src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/soothe-bell.png"
+                      />
+                    </p>
+                  )
+                break;
+                case "time_of_day":
+                  return <p>{info.time_of_day}</p>
+                break;
+                case "location":
+                  return <p>special location</p>
+                break;
+                case "known_move":
+                  return <p>knowing {info.known_move.name}</p>
+                break;
+                case "known_move_type":
+                  return <p>knowing {info.known_move_type.name} type move</p>
+                break;
+                case "min_beauty":
+                  return <p>high beauty</p>
+                break;
+                case "relative_physical_stats":
+                  return <p>Atk{info.relative_physical_stats>0?">":"<"}Def</p>
+                break;
+                case "gender":
+                  return <p>{info.gender?"female":"male"}</p>
+                break;
+                case "held_item":
+                  return( 
+                    <p>
+                      {clearText(info.held_item.name)}<br/>
+                      <img
+                        className="evo-item"
+                        src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/${info.held_item.name}.png`}
+                      />
+                    </p>
+                  )
+                break;
+                default:
+                  return <p>{clearText(n)}</p>
+                break;
+              }
+            })}
+          </div>
+        );
+      break;
+      case "use-item":
+        return(
+          <p>
+            {clearText(info.item.name)}<br/>
+            <img
+              className="evo-item"
+              src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/${info.item.name}.png`}
+            />
+          </p>
+        )
+      break;
+      case "trade":
+        return(
+          <p>
+            trade<br/>
+            {info.held_item && clearText(info.held_item.name)}<br/>
+            {info.held_item && <img
+              className="evo-item"
+              src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/${info.held_item.name}.png`}
+            />}
+          </p>)
+      break;
+      default:
+        return clearText(info.trigger.name);
+      break;
+    }
   }
 
-  const evolutionTree = (entry)=>{
-    console.log(entry)
+  const evolutionTree = (entry, babyItem)=>{
     const idMatcher = /(?<=\/)\d+(?=\/)/;
     return(
       <>
         {entry &&
-          <li>
-            <div>
-              <div>
+          <li
+            className="evo-container"
+            key={entry.species.name}
+          >
+            <div className="evo-wrapper" onClick={()=>{
+              navigate(`/pokemon/${entry.species.name}`);
+            }}>
+              <div className="evo-detail">
                 {!!entry.evolution_details.length &&
                   <div>
                     {evoDetails(entry.evolution_details[0])}
                   </div>
                 }
-                <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${entry.species.url.match(idMatcher)[0]}.png`}/>
+                {!!babyItem &&
+                  <div>
+                    {clearText(babyItem.name)+" (Baby)"}
+                    <img className="evo-item" src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/${babyItem.name}.png`}/>
+                  </div>
+                }
+                <img className="evo-portrait" src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${entry.species.url.match(idMatcher)[0]}.png`}/>
               </div>
               <h3>{entry.species.name}</h3>
             </div>
@@ -36,113 +142,12 @@ export default function({species, evolution, name}){
       </>
     )
   }
-  const checkEvo = (entry, arr)=>{
-    if(!arr){
-      arr = [];
-    }
-    if(entry){
-      if(entry.evolves_to.length){
-        const monEvos = entry.evolves_to.map(n=>{
-          const details = n.evolution_details[0];
-          const evoForm = {
-            from: entry.species.name,
-            to: n.species.name
-          };
-          const evoKeys = Object.keys(details).filter(key=>{
-            if(key!="trigger" && details[key]){
-              return true;
-            }else{
-              return false;
-            }
-          });
-          evoForm.how = details.trigger.name;
-          switch(details.trigger){
-            case "trade":
-            break;
-            default:
-            break;
-          }
-          evoForm.details = evoKeys.map(how=>{
-            switch(how){
-              case "item":
-                return details.item.name;
-              break;
-              case "min_happiness":
-                return "high happiness";
-              break;
-              case "time_of_day":
-                return details.time_of_day;
-              break;
-              case "location":
-                return "in a special location";
-              break;
-              case "known_move_type":
-                return `knowing a ${details.known_move_type.name} type move`;
-              break;
-              case "min_affection":
-                return "high affection";
-              break;
-              case "min_level":
-                return `lv${details.min_level}`;
-              break;
-              case "held_item":
-                return `trading with ${details.held_item.name}`
-              break;
-              default:
-                return how;
-              break;
-            }
-          });
-          //console.log(n.evolution_details[0].trigger)
-          //console.log(evoKeys)
-          arr.push(evoForm);
-          checkEvo(n,arr);
-        })
-      }
-    }
-    return arr;
-  }
-  
-  useEffect(()=>{
-    //console.log(checkEvo(evolution.chain))
-  },[evolution]);
-  
-  /*
-
-          {species && species.varieties && species.varieties.length>1 && species.varieties.map(n=>{
-            const varId = n.pokemon.url.match(urlPattern)[0];
-            return(
-              <li key={n.pokemon.name} className={n.pokemon.name==monData.name?"active-mon":""}>
-                <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${varId}.png`}/>
-                {n.pokemon.name.split("-").join(" ")}
-              </li>
-            )
-          })}
-          {evolution && evolution.chain &&
-            (<>
-              <li>{evolution.chain.species.name}</li>
-              {evolution.chain.evolves_to.map(n=>{
-                console.log(n)
-                return (<li>meh</li>)
-              })}
-            </>)
-
-          }
-          {}
-  */
   return(
-    <div>
-      <div>
-        <h3>Forms</h3>
+      <div className="evo-list">
+        <h2>evolutions</h2>
         <ul>
+          {evolutionTree(evolution.chain, evolution.baby_trigger_item)}
         </ul>
       </div>
-      <div>
-        <h3>evolutions</h3>
-        <ul className="evo-list">
-          {evolutionTree(evolution.chain)}
-        </ul>
-      </div>
-    </div>
   )
 }

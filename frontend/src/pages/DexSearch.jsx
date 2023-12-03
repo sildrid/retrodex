@@ -1,4 +1,3 @@
-
 import './DexSearch.css';
 import {useState,useEffect} from 'react';
 

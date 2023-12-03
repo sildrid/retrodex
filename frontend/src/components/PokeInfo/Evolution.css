@@ -1,42 +1,51 @@
 .evo-list.evo-list{
-  display: block;
-  width: 100%;
-}
-.evo-list.evo-list h3, .evo-list.evo-list ul, .evo-list.evo-list li{
-  padding: 0;
-  margin: 0;
-  border: none;
-}
-.evo-list.evo-list div{
-  box-shadow: 0 0 1px green;
-  align-self: center;
-  text-transform: capitalize;
-}
-.evo-list.evo-list div div{
-  background-color: red;
-  display: flex;
-  justify-content: center;
-  font-size: .6rem;
-}
-.evo-list.evo-list div div div{
-  width: 50%;
-}
-.evo-list.evo-list img{
-  width: 4rem;
-}
-.evo-list.evo-list h3{
-  font-size: .8rem;
-  text-transform: capitalize;
-  width: 9rem;
-  margin: 0 auto;
+  box-shadow: 1px 1px 3px var(--lcd-b);
+  margin: .5rem 0;
+  padding: .3rem;
 }
 .evo-list.evo-list ul{
-  display: block;
-  box-shadow: 0 0 1px red;
+  padding: 0;
+  border: none;
 }
-.evo-list.evo-list li{
+.evo-list .evo-container{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  border: none;
+}
+.evo-list .evo-wrapper{
+  min-width: 9rem;
+  flex-grow: 100;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.evo-list .evo-detail{
   display: flex;
   justify-content: space-evenly;
-  width: 100%;
-  box-shadow: 0 0 1px blue;
+  font-size: .6rem;
+  text-transform: capitalize;
+  padding: .5rem .2rem;
+  border-radius: .5rem;
+  box-shadow: 1px 1px 2px var(--lcd-b);
+}
+.evo-list .evo-detail div{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.evo-list .evo-portrait{
+  width: 5rem;
+}
+.evo-list .evo-item{
+  width: 2rem;
+}
+.evo-list .evo-wrapper h3{
+  font-size: .8rem;
+  border-radius: .5rem;
+  box-shadow: 1px 1px 2px var(--lcd-b);
+  text-transform: capitalize;
+  padding: .3rem 0;
+  margin-bottom: .5rem;
 }

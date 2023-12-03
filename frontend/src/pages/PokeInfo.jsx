@@ -2,6 +2,7 @@ import {useState, useEffect} from 'react';
 import {useParams, useNavigate} from 'react-router-dom';
 import './PokeInfo.css';
 import fetcher from '../modules/fetcher.js';
+import Forms from '../components/PokeInfo/Forms.jsx';
 import Evolution from '../components/PokeInfo/Evolution.jsx';
 
 export default function(props){
@@ -26,7 +27,7 @@ export default function(props){
       }
     }
     getPokeData();
-  },[]);
+  },[id]);
   const urlPattern = /(?<=\/)\d+(?=\/$)/
 
 
@@ -39,7 +40,11 @@ export default function(props){
         </div>
         <ul>
           <li>
-            <input id="info-forms" name="poke-info-window" type="radio" defaultChecked/>
+            <input id="info-misc" name="poke-info-window" type="radio" defaultChecked/>
+            <label htmlFor="info-misc">Misc</label>
+          </li>
+          <li>
+            <input id="info-forms" name="poke-info-window" type="radio"/>
             <label htmlFor="info-forms">Species</label>
           </li>
           <li>
@@ -50,13 +55,11 @@ export default function(props){
             <input id="info-moves" name="poke-info-window" type="radio"/>
             <label htmlFor="info-moves">Moves</label>
           </li>
-          <li>
-            <input id="info-misc" name="poke-info-window" type="radio"/>
-            <label htmlFor="info-misc">Misc</label>
-          </li>
         </ul>
       </nav>
-      <Evolution species={speciesData} evolution={evoData}/>
+      
+      <Forms species={speciesData} name={id}/>
+      <Evolution evolution={evoData}/>
       <ul>weak to</ul>
       <ul>resist</ul>
       <ul>abilities</ul>
