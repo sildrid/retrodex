@@ -57,9 +57,8 @@ export default function(props){
           </li>
         </ul>
       </nav>
-      
       <Forms species={speciesData} name={id}/>
-      <Evolution evolution={evoData}/>
+      <Evolution evolution={evoData} name={id}/>
       <ul>weak to</ul>
       <ul>resist</ul>
       <ul>abilities</ul>

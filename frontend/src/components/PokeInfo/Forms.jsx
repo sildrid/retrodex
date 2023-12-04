@@ -1,7 +1,6 @@
 import {useNavigate} from 'react-router-dom';
 import './Forms.css';
 export default function({species, name}){
-  console.log(species);
   const navigate = useNavigate();
   const clearText = (txt)=>{
     return txt.replace(/[-_]/g," ");

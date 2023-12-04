@@ -1,7 +1,7 @@
 import {useNavigate} from 'react-router-dom';
 import './Evolution.css';
 
-export default function({evolution}){
+export default function({evolution, name}){
   const navigate = useNavigate();
   const clearText = (txt)=>{
     return txt.replace(/[-_]/g," ");
@@ -113,7 +113,7 @@ export default function({evolution}){
             className="evo-container"
             key={entry.species.name}
           >
-            <div className="evo-wrapper" onClick={()=>{
+            <div className={`evo-wrapper${entry.species.name==name?" active-evo":""}`} onClick={()=>{
               navigate(`/pokemon/${entry.species.name}`);
             }}>
               <div className="evo-detail">
@@ -128,7 +128,15 @@ export default function({evolution}){
                     <img className="evo-item" src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/${babyItem.name}.png`}/>
                   </div>
                 }
+                {
+                  !babyItem && !entry.evolution_details.length &&
+                  <div></div>
+                }
                 <img className="evo-portrait" src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${entry.species.url.match(idMatcher)[0]}.png`}/>
+                {
+                  !babyItem && !entry.evolution_details.length &&
+                  <div></div>
+                }
               </div>
               <h3>{entry.species.name}</h3>
             </div>

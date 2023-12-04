@@ -19,19 +19,25 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin: .3rem .2rem;
+}
+.evo-list .active-evo .evo-detail, .evo-list .active-evo h3{
+  background-color: var(--lcd-b);
+  color: var(--lcd-w);
 }
 .evo-list .evo-detail{
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   font-size: .6rem;
   text-transform: capitalize;
   padding: .5rem .2rem;
-  border-radius: .5rem;
-  box-shadow: 1px 1px 2px var(--lcd-b);
+  border-radius: .5rem .5rem 0 0;
+  box-shadow: 1px 1px 3px var(--lcd-b);
 }
 .evo-list .evo-detail div{
   display: flex;
   flex-direction: column;
+  flex-grow: 100;
   justify-content: space-evenly;
   align-items: center;
 }
@@ -43,9 +49,8 @@
 }
 .evo-list .evo-wrapper h3{
   font-size: .8rem;
-  border-radius: .5rem;
-  box-shadow: 1px 1px 2px var(--lcd-b);
+  border-radius: 0 0 .5rem .5rem;
+  box-shadow: 1px 1px 3px var(--lcd-b);
   text-transform: capitalize;
   padding: .3rem 0;
-  margin-bottom: .5rem;
 }
