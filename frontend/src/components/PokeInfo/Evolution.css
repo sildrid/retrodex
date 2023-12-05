@@ -10,7 +10,7 @@
 .evo-list .evo-container{
   display: flex;
   justify-content: center;
-  width: 100%;
+  min-width: 25vw;
   border: none;
 }
 .evo-list .evo-wrapper{
