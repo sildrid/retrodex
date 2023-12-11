@@ -66,4 +66,5 @@
 @keyframes lensload{
   50%{
     filter: hue-rotate(90deg);
+  }
 }

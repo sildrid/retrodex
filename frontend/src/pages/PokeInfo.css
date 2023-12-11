@@ -63,3 +63,34 @@
   background-color: var(--lcd-b);
   color: var(--lcd-w);
 }
+
+.poke-info .portrait-info{
+  position: relative;
+  text-align: center;
+}
+.poke-info .portrait-info p{
+  position: absolute;
+  padding: 1rem;
+  text-transform: capitalize;
+}
+.poke-info .portrait-info .type-b{
+  bottom: 0;
+  right: 0;
+}
+.poke-info .portrait-info img{
+  width: 50vmin;
+  filter: drop-shadow(8px 8px);
+}
+.poke-info .portrait-info .portrait-loaded{
+  animation: evolve .5s ease-in;
+}
+@keyframes evolve{
+  0%{
+    /*transform: scale(0);*/
+    filter: drop-shadow(0 0) grayscale(100%) brightness(1000%);
+  }
+  100%{
+    /*transform: scale(1);*/
+    filter: drop-shadow(8px 8px) grayscale(0%) brightness(100%);
+  }
+}

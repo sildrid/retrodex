@@ -16,7 +16,7 @@ export default function(){
   const [dataError, setDataError] = useState(false);
   useEffect(()=>{
     const getDexData = async ()=>{
-      const data = await fetcher('http://localhost:8000/api/data');
+      const data = await fetcher('https://retrodex-backend.fly.dev/api/data');
       if(Object.keys(data).length>0){
         setDexData(data);
       }else{
@@ -33,7 +33,7 @@ export default function(){
         <BrowserRouter>
           <Routes>
             <Route path="/search" element={<DexSearch data={dexData}/>}/>
-            <Route path="/pokemon/:id" element={<PokeInfo/>}/>
+            <Route path="/pokemon/:id" element={<PokeInfo data={dexData}/>}/>
             <Route path="*" element={<NotFound/>} />
           </Routes>
         </BrowserRouter>

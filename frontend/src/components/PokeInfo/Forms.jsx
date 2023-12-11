@@ -17,7 +17,10 @@ export default function({species, name}){
           const pokeId = n.pokemon.url.match(idMatcher)[0];
           return(
             <li
-              onClick={()=>{navigate(`/pokemon/${n.pokemon.name}`)}}
+              onClick={()=>{
+                document.querySelector(".dex-screen").scrollTo({top: 0, behavior: 'smooth'});
+                navigate(`/pokemon/${n.pokemon.name}`);
+              }}
               key={pokeId}
               className={name==n.pokemon.name?"active-form":""}
             >

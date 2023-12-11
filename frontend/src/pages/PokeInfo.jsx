@@ -3,15 +3,18 @@ import {useParams, useNavigate} from 'react-router-dom';
 import './PokeInfo.css';
 import fetcher from '../modules/fetcher.js';
 import Forms from '../components/PokeInfo/Forms.jsx';
+import TypeGenderGroup from '../components/PokeInfo/TypeGenderGroup.jsx';
 import Evolution from '../components/PokeInfo/Evolution.jsx';
 
-export default function(props){
+export default function({data}){
   const navigate = useNavigate();
   const {id} = useParams()
   const [monData,setMonData] = useState({});
+  const [monTypes, setMonTypes] = useState(["",""]);
   const [speciesData,setSpeciesData] = useState({});
   const [evoData, setEvoData] = useState({});
-  let test = false;
+  const [portraitLoaded, setPortraitLoaded] = useState("");
+
   useEffect(()=>{
     const getPokeData = async ()=>{
       try{
@@ -21,18 +24,31 @@ export default function(props){
         setSpeciesData(dataSpecies);
         const dataEvo = await fetcher(dataSpecies.evolution_chain.url);
         setEvoData(dataEvo);
+        setMonTypes([dataMon.types[0].type.name, dataMon.types[1]?dataMon.types[1].type.name:dataMon.types[0].type.name]);
       }
       catch(err){
         console.log(err);
       }
     }
     getPokeData();
+    setPortraitLoaded("");
   },[id]);
   const urlPattern = /(?<=\/)\d+(?=\/$)/
 
 
   return(
     <div className="poke-info">
+      <div className="portrait-info" style={{background:`linear-gradient(135deg, var(--${monTypes[0]}-type),var(--${monTypes[1]}-type))`}}>
+        <p>{monTypes[0]}</p>
+        {monTypes[0]!=monTypes[1] &&
+        <p className="type-b">{monTypes[1]}</p>
+        }
+        <img
+          className={portraitLoaded}
+          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${monData.id}.png`}
+          onLoad={()=>{setPortraitLoaded("portrait-loaded")}}
+        />
+      </div>
       <nav>
         <div>
           <button onClick={()=>{navigate("/search")}}>&#10094;</button>
@@ -57,13 +73,10 @@ export default function(props){
           </li>
         </ul>
       </nav>
+
       <Forms species={speciesData} name={id}/>
       <Evolution evolution={evoData} name={id}/>
-      <ul>weak to</ul>
-      <ul>resist</ul>
-      <ul>abilities</ul>
-      <ul>stat spread</ul>
-      <ul>misc</ul>
+      <TypeGenderGroup typeData={data.types}type={monData.types} species={speciesData}/>
     </div>
   )
 }

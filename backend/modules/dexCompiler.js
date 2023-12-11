@@ -3,8 +3,8 @@
 const drawProgress = (current,max)=>{
   const pct = Math.floor(current / max * 100);
   const barSize = Math.floor(pct/5);
-  process.stdout.moveCursor(0,-1);
-  process.stdout.clearLine(1);
+//  process.stdout.moveCursor(0,-1);
+//  process.stdout.clearLine(1);
   console.log(`[${"*".repeat(barSize) + " ".repeat(20 - barSize)}] ${pct}%`);
 }
 
@@ -33,7 +33,7 @@ const fetcher = async (url, retries)=>{
 
 /////////////////////////////////////////////////
 
-const getAbilityList = async ()=>{
+const updateAbilities = async ()=>{
   try{
     console.log("Fetching abilities...\n")
     let nextUrl = "https://pokeapi.co/api/v2/ability/?limit=10";
@@ -115,7 +115,7 @@ const getType = async (typeUrl)=>{
 
 /////////////////////////////////////////////////
 
-const getTypeList = async ()=>{
+const updateTypes = async ()=>{
   try{
     console.log("Fetching types...\n");
     drawProgress(0,1);
@@ -138,7 +138,7 @@ const getTypeList = async ()=>{
   }
   catch(err){
     console.log(err);
-    return null;
+    return [];
   }
 }
 
@@ -183,7 +183,7 @@ const getPokemon = async (targetUrl)=>{
 
 /////////////////////////////////////////////////
 
-const getPokemonList = async ()=>{
+const updatePokemon = async ()=>{
   try{
     console.log("Fetching pokemon...\n");
     drawProgress(0,1);
@@ -206,39 +206,6 @@ const getPokemonList = async ()=>{
 
 /////////////////////////////////////////////////
 
-const dexCompiler = async (targetUrl) =>{
-  try{
-    const abilities = await getAbilityList();
-    const types = await getTypeList();
-    const pokemonList = await getPokemonList();
-
-    console.log("Compiling data...")
-    const pokemon = pokemonList.map(mon =>{
-      const monTypes = types.filter(type =>{
-        const monSearch = type.pokemon.find(n => n.name === mon.name);
-        return !!monSearch;
-      });
-      const entryType = [];
-      monTypes.forEach(type =>{
-        const monSlot = type.pokemon.find(n => n.name === mon.name).slot;
-        entryType[monSlot-1] = type.name;
-      });
-      return {
-        name: mon.name,
-        id: mon.id,
-        type: entryType
-      };
-    })
-
-    types.forEach(n=>delete n.pokemon);
-    console.log("Finished compiling data!");
-    return {types, pokemon, abilities};
-  }
-  catch(err){
-    console.log("Error compiling dex data", err);
-    return null;
-  }
-}
 
 
-module.exports = dexCompiler;
+module.exports = {updateAbilities,updateTypes,updatePokemon};

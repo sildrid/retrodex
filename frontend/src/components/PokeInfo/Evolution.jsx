@@ -129,6 +129,7 @@ export default function({evolution, name}){
             key={entry.species.name}
           >
             <div className={`evo-wrapper${entry.species.name==name?" active-evo":""}`} onClick={()=>{
+              document.querySelector(".dex-screen").scrollTo({top: 0, behavior: 'smooth'});
               navigate(`/pokemon/${entry.species.name}`);
             }}>
               <div className="evo-detail">
