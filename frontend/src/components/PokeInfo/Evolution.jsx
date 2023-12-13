@@ -28,14 +28,14 @@ export default function({evolution, name}){
     return(
       <div>
         {triggerReturn()}
-        {requirements.map(n=>{
+        {requirements.map((n,i)=>{
           switch(n){
             case "gender":
-              return <p>{info.gender?"female":"male"}</p>
+              return <p key={i}>{info.gender?"female":"male"}</p>
             break;
             case "held_item":
               return( 
-                <p>
+                <p key={i}>
                   {clearText(info.held_item.name)}<br/>
                   <img
                     className="evo-item"
@@ -46,7 +46,7 @@ export default function({evolution, name}){
             break;
             case "item":
               return(
-                <p>
+                <p key={i}>
                   {clearText(info.item.name)}<br/>
                   <img
                     className="evo-item"
@@ -56,7 +56,7 @@ export default function({evolution, name}){
               )
             break;
             case "known_move":
-              return <p>knowing {info.known_move.name}</p>
+              return <p key={i}>knowing {info.known_move.name}</p>
             break;
             case "known_move_type":
               return <p>knowing {info.known_move_type.name} type move</p>
@@ -80,7 +80,7 @@ export default function({evolution, name}){
               return <p>high beauty</p>
             break;
             case "min_level":
-              return <p>Lv{info.min_level}+</p>
+              return <p key={i}>Lv{info.min_level}+</p>
             break;
             case "party_species":
               return(
@@ -112,7 +112,7 @@ export default function({evolution, name}){
               )
             break;
             default:
-              return <p>{clearText(n)}</p>
+              return <p key={i}>{clearText(n)}</p>
             break;
           }
         })}
@@ -120,58 +120,69 @@ export default function({evolution, name}){
     )
   }
 
-  const evolutionTree = (entry, babyItem)=>{
+  const evolutionTree = (key,entry, babyItem)=>{
     return(
       <>
         {entry &&
-          <li
-            className="evo-container"
-            key={entry.species.name}
-          >
-            <div className={`evo-wrapper${entry.species.name==name?" active-evo":""}`} onClick={()=>{
+          <li className="evo-wrapper">
+          <div
+            className={`evo-container${entry.species.name==name?" active-evo":""}`}
+            onClick={()=>{
               document.querySelector(".dex-screen").scrollTo({top: 0, behavior: 'smooth'});
               navigate(`/pokemon/${entry.species.name}`);
-            }}>
-              <div className="evo-detail">
-                {!!entry.evolution_details.length &&
-                  <div>
-                    {evoDetails(entry.evolution_details[0])}
-                  </div>
-                }
-                {!!babyItem &&
-                  <div>
-                    {clearText(babyItem.name)+" (Baby)"}
-                    <img className="evo-item" src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/${babyItem.name}.png`}/>
-                  </div>
-                }
-                {
-                  !babyItem && !entry.evolution_details.length &&
-                  <div></div>
-                }
-                <img className="evo-portrait" src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${entry.species.url.match(idMatcher)[0]}.png`}/>
-                {
-                  !babyItem && !entry.evolution_details.length &&
-                  <div></div>
-                }
-              </div>
-              <h3>{entry.species.name}</h3>
+            }}
+            key={entry.species.name+key}
+          >
+            <div className="evo-detail">
+              {!!entry.evolution_details.length &&
+                <div className="evo-how">
+                  {evoDetails(entry.evolution_details[0])}
+                </div>
+              }
+                  {!!babyItem &&
+                    <div className="evo-how">
+                      {clearText(babyItem.name)+" (Baby)"}
+                      <img className="evo-item" src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/${babyItem.name}.png`}/>
+                    </div>
+                  }
+                  <img className="evo-portrait" src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${entry.species.url.match(idMatcher)[0]}.png`}/>
             </div>
-            <ul>
-              {entry.evolves_to.map(evoData=>{
-                return evolutionTree(evoData);
-              })}
-            </ul>
+            <h3>{entry.species.name}</h3>
+            </div>
+            {!!entry.evolves_to.length &&
+              <ul className="evo-to">
+                {entry.evolves_to.map(evoData=>{
+                  return evolutionTree(key+1,evoData);
+                })}
+              </ul>
+            }
           </li>
         }
       </>
     )
   }
   return(
-      <div className="evo-list">
-        <h2>evolutions</h2>
-        <ul>
-          {evolutionTree(evolution.chain, evolution.baby_trigger_item)}
-        </ul>
-      </div>
+    <div className="evo-list">
+      <h2>evolutions</h2>
+          <ul className="evo-tree">
+      {evolutionTree(0, evolution.chain, evolution.baby_trigger_item)}
+          </ul>
+    </div>
   )
 }
+/*
+<li key={"mon"+mon.id} onClick={()=>{navigate(`/pokemon/${mon.name}`)}}>
+            <h4>nº{mon.id<1000?mon.id:"-"}</h4>
+            <img
+              loading="lazy"
+              alt={mon.name}
+              src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${mon.id}.png`}
+              onLoad={e=>e.target.classList.add("img-loaded")}
+            />
+            <div>
+              {mon.type.map((type,i)=><p key={i} className={type+"-bg"}>{type}</p>)}
+            </div>
+            <h3>{mon.name}</h3>
+          </li>
+
+*/

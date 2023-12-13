@@ -50,7 +50,7 @@ export default function({data}){
         />
       </div>
       <nav>
-        <div>
+        <div className="mon-title">
           <button onClick={()=>{navigate("/search")}}>&#10094;</button>
           <h2>{id}</h2>
         </div>
@@ -74,9 +74,9 @@ export default function({data}){
         </ul>
       </nav>
 
-      <Forms species={speciesData} name={id}/>
       <Evolution evolution={evoData} name={id}/>
-      <TypeGenderGroup typeData={data.types}type={monData.types} species={speciesData}/>
     </div>
   )
 }
+      /*<Forms species={speciesData} name={id}/>*/
+      /*<TypeGenderGroup typeData={data.types}type={monData.types} species={speciesData}/>*/

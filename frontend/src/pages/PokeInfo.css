@@ -1,69 +1,3 @@
-.poke-info{
-}
-.poke-info div ul{
-  border: 1px solid red;
-}
-
-
-.poke-info nav div{
-  display: flex;
-  align-items: center;
-  padding: 0.3rem;
-  background-color: var(--lcd-b);
-  color: var(--lcd-w);
-}
-.poke-info button{
-  text-shadow: 0 0 1px var(--reflection);
-  font-family: "Press Start 2P";
-  background-color: var(--lcd-b);
-  color: var(--lcd-w);
-  height: 3rem;
-  aspect-ratio: 1;
-  border-radius: 0;
-  border: 1px solid var(--lcd-w);
-}
-.poke-info h2{
-  text-transform: capitalize;
-  text-shadow: 0 0 1px var(--reflection);
-  flex-grow: 100;
-  text-align: center;
-}
-
-
-.poke-info nav ul{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin: 0.3rem 0;
-}
-.poke-info nav li{
-  width: 49%;
-  text-align: center;
-  border: 1px solid var(--shadow);
-  padding: 0.5rem 0;
-}
-
-.poke-info div ul{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  padding: .5rem 0;
-}
-.poke-info div li{
-  width: 24%;
-  text-align: center;
-  border: 1px solid green;
-}
-.poke-info div ul img{
-  width: 100%;
-}
-
-
-.active-mon{
-  background-color: var(--lcd-b);
-  color: var(--lcd-w);
-}
-
 .poke-info .portrait-info{
   position: relative;
   text-align: center;
@@ -86,11 +20,59 @@
 }
 @keyframes evolve{
   0%{
-    /*transform: scale(0);*/
     filter: drop-shadow(0 0) grayscale(100%) brightness(1000%);
   }
   100%{
-    /*transform: scale(1);*/
     filter: drop-shadow(8px 8px) grayscale(0%) brightness(100%);
   }
+}
+
+.poke-info nav .mon-title{
+  display: flex;
+  align-items: center;
+  padding: 0.3rem;
+  background-color: var(--lcd-b);
+  color: var(--lcd-w);
+}
+.poke-info nav .mon-title button{
+  text-shadow: 0 0 1px var(--reflection);
+  font-family: "Press Start 2P";
+  background-color: var(--lcd-b);
+  color: var(--lcd-w);
+  height: 3rem;
+  aspect-ratio: 1;
+  border-radius: 0;
+  border: 1px solid var(--lcd-w);
+}
+.poke-info nav .mon-title h2{
+  text-transform: capitalize;
+  text-shadow: 0 0 1px var(--reflection);
+  flex-grow: 100;
+  text-align: center;
+}
+
+
+.poke-info nav ul{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 0.3rem 0;
+}
+.poke-info nav li{
+  width: 49.5%;
+  text-align: center;
+  box-shadow: 1px 1px 3px var(--shadow);
+  margin: .1rem 0;
+}
+.poke-info nav label{
+  padding: .3rem 0;
+  display: block;
+  transition: .3s;
+}
+.poke-info nav input{
+  display: none;
+}
+.poke-info nav input:checked + label{
+  background-color: var(--lcd-b);
+  color: var(--lcd-w);
 }

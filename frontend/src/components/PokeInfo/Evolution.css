@@ -1,56 +1,70 @@
-.evo-list.evo-list{
-  box-shadow: 1px 1px 3px var(--lcd-b);
-  margin: .5rem 0;
-  padding: .3rem;
-}
-.evo-list.evo-list ul{
-  padding: 0;
-  border: none;
-}
-.evo-list .evo-container{
-  display: flex;
-  justify-content: center;
-  min-width: 25vw;
-  border: none;
+.evo-list h2{
+  text-transform: capitalize;
+  text-align: center;
+  font-size: 1.3rem;
+  padding-top: .5rem;
 }
 .evo-list .evo-wrapper{
+  display: flex;
+  justify-content: center;
+  gap: .5rem;
+  align-items: center;
+}
+.evo-list .evo-container{
+}
+.evo-list .evo-to-list{
+  background-color: red;
+}
+.evo-list .evo-container{
+  box-shadow: 1px 1px 3px var(--shadow);
+  border-radius: 0.5rem;
+  min-height: 9rem;
   min-width: 9rem;
-  flex-grow: 100;
+  position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  margin: .3rem .2rem;
+  justify-content: space-evenly;
+  text-transform: capitalize;
+  transition: .1s;
 }
-.evo-list .active-evo .evo-detail, .evo-list .active-evo h3{
-  background-color: var(--lcd-b);
+.evo-list .evo-container:active, .evo-list .active-evo{
   color: var(--lcd-w);
+  background-color: var(--lcd-b);
+}
+.evo-list .evo-container:hover{
+  background-color: var(--reflection);
+  transform: scale(1.05);
+}
+.evo-list .evo-container h3{
+  font-size: 0.85rem;
+  bottom: 1.3rem;
+  text-align: center;
+  width: 100%;
+  position: absolute;
+  bottom: .3rem;
 }
 .evo-list .evo-detail{
   display: flex;
-  justify-content: space-between;
-  font-size: .6rem;
-  text-transform: capitalize;
-  padding: .5rem .2rem;
-  border-radius: .5rem .5rem 0 0;
-  box-shadow: 1px 1px 3px var(--lcd-b);
+  justify-content: center;
 }
-.evo-list .evo-detail div{
-  display: flex;
-  flex-direction: column;
-  flex-grow: 100;
-  justify-content: space-evenly;
-  align-items: center;
-}
-.evo-list .evo-portrait{
+.evo-list .evo-how{
   width: 5rem;
+  font-size: .6rem;
+  text-align: center;
+  padding: .3rem 0;
 }
 .evo-list .evo-item{
-  width: 2rem;
+  width: 2.5rem;
 }
-.evo-list .evo-wrapper h3{
-  font-size: .8rem;
-  border-radius: 0 0 .5rem .5rem;
-  box-shadow: 1px 1px 3px var(--lcd-b);
-  text-transform: capitalize;
+.evo-list .evo-portrait{
+  width: 4.5rem;
+  align-self: center;
+}
+.evo-list .baby-evo-detail{
+  background-color: red;
+  width: 5rem;
+  font-size: .6rem;
+  text-align: center;
   padding: .3rem 0;
+
 }
