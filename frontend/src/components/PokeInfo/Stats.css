@@ -1,0 +1,101 @@
+.stats-wrapper{
+}
+.stats-wrapper .ability-list{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  box-shadow: 1px 1px 3px var(--lcd-b);
+  border-radius: .5rem;
+  padding: .5rem;
+  gap: .5rem 0;
+  margin-bottom: 1.5rem;
+}
+.stats-wrapper .ability-list li{
+  box-shadow: 1px 1px 3px var(--lcd-b);
+  border-radius: .5rem;
+  padding: .3rem;
+  width: 49.5%;
+}
+.stats-wrapper .ability-list h4{
+  text-align: center;
+  text-transform: capitalize;
+  font-size: 1rem;
+}
+.stats-wrapper .ability-list p{
+  font-size: .7rem;
+}
+
+.stats-wrapper .stat-list{
+  box-shadow: 1px 1px 3px var(--lcd-b);
+  border-radius: .5rem;
+  padding: .5rem;
+  margin-bottom: 1.5rem;
+}
+.stats-wrapper .stat-list li{
+  margin: .5rem 0;
+  display: flex;
+  justify-content: space-between;
+}
+.stats-wrapper .stat-list p{
+  text-align: right;
+}
+.stats-wrapper .stat-name{
+  width: 5rem;
+}
+.stats-wrapper .stat-number{
+  width: 3.3rem;
+}
+.stats-wrapper .stat-list div{
+  border-radius: 1rem;
+  display: flex;
+  padding: .2rem;
+  animation: fillbar .5s;
+}
+@keyframes fillbar{
+  0%{
+    width:0;
+  }
+}
+.stats-wrapper .stat-list .stat-bar-container{
+  box-shadow: 1px 1px 3px var(--lcd-b);
+  flex-grow: 100;
+  padding: 0;
+}
+
+
+.stats-wrapper .weakres-wrapper{
+  text-transform: capitalize;
+  padding: .5rem;
+  box-shadow: 1px 1px 3px var(--lcd-b);
+}
+.stats-wrapper h3{
+  padding: .3rem 0;
+  text-align: center;
+}
+.stats-wrapper .weakres-wrapper ul{
+  display: flex;
+  box-shadow: 1px 1px 3px var(--lcd-b);
+  border-radius: .5rem;
+  padding: .5rem;
+  flex-wrap: wrap;
+  gap: .5rem 0;
+  margin-bottom: 1.5rem;
+  justify-content: space-evenly;
+}
+.stats-wrapper .weakres-wrapper li{
+  border-radius: .5rem;
+  padding: .3rem;
+  box-shadow: 1px 1px 3px var(--lcd-b);
+  font-size: .8rem;
+  width: 13rem;
+  text-align: center;
+}
+.stats-wrapper .weakres-wrapper span{
+  padding: .3rem .5rem;
+  color: var(--reflection);
+  text-shadow: 1px 1px 2px var(--shadow);
+  box-shadow: 1px 1px 3px var(--lcd-b);
+  margin-right: .3rem;
+  border-radius: 1rem;
+  display: inline-block;
+}

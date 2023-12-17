@@ -2,8 +2,10 @@ import {useState, useEffect} from 'react';
 import {useParams, useNavigate} from 'react-router-dom';
 import './PokeInfo.css';
 import fetcher from '../modules/fetcher.js';
+
+import Stats from '../components/PokeInfo/Stats.jsx';
 import Forms from '../components/PokeInfo/Forms.jsx';
-import TypeGenderGroup from '../components/PokeInfo/TypeGenderGroup.jsx';
+import GenderGroup from '../components/PokeInfo/GenderGroup.jsx';
 import Evolution from '../components/PokeInfo/Evolution.jsx';
 
 export default function({data}){
@@ -14,6 +16,7 @@ export default function({data}){
   const [speciesData,setSpeciesData] = useState({});
   const [evoData, setEvoData] = useState({});
   const [portraitLoaded, setPortraitLoaded] = useState("");
+  const [tabSelect, setTabSelect] = useState("stats");
 
   useEffect(()=>{
     const getPokeData = async ()=>{
@@ -35,6 +38,10 @@ export default function({data}){
   },[id]);
   const urlPattern = /(?<=\/)\d+(?=\/$)/
 
+  const tabUpdate = (e)=>{
+    setTabSelect(e.target.value);
+  }
+
 
   return(
     <div className="poke-info">
@@ -43,40 +50,54 @@ export default function({data}){
         {monTypes[0]!=monTypes[1] &&
         <p className="type-b">{monTypes[1]}</p>
         }
-        <img
-          className={portraitLoaded}
-          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${monData.id}.png`}
-          onLoad={()=>{setPortraitLoaded("portrait-loaded")}}
-        />
+        { monData.id &&
+          <img
+            className={portraitLoaded}
+            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${monData.id}.png`}
+            onLoad={()=>{setPortraitLoaded("portrait-loaded")}}
+          />
+        }
       </div>
       <nav>
         <div className="mon-title">
           <button onClick={()=>{navigate("/search")}}>&#10094;</button>
           <h2>{id}</h2>
         </div>
-        <ul>
-          <li>
-            <input id="info-misc" name="poke-info-window" type="radio" defaultChecked/>
-            <label htmlFor="info-misc">Misc</label>
-          </li>
-          <li>
-            <input id="info-forms" name="poke-info-window" type="radio"/>
-            <label htmlFor="info-forms">Species</label>
-          </li>
-          <li>
-            <input id="info-builder" name="poke-info-window" type="radio"/>
+        <form>
+            <input id="info-stats" name="poke-info-window" type="radio" value="stats" onChange={tabUpdate} defaultChecked/>
+            <label htmlFor="info-stats">Stats</label>
+            <input id="info-species" name="poke-info-window" value="species" onChange={tabUpdate} type="radio"/>
+            <label htmlFor="info-species">Species</label>
+            <input id="info-builder" name="poke-info-window" value="builder" onChange={tabUpdate} type="radio"/>
             <label htmlFor="info-builder">Builder</label>
-          </li>
-          <li>
-            <input id="info-moves" name="poke-info-window" type="radio"/>
+            <input id="info-moves" name="poke-info-window" value="moves" onChange={tabUpdate} type="radio"/>
             <label htmlFor="info-moves">Moves</label>
-          </li>
-        </ul>
+        </form>
       </nav>
-
-      <Evolution evolution={evoData} name={id}/>
+      {tabSelect=="species" &&
+        <>
+          <Forms species={speciesData} name={id} data={data}/>
+          <Evolution evolution={evoData} name={id} data={data}/>
+          <GenderGroup typeData={data.types}type={monData.types} species={speciesData}/>
+        </>
+      }
+      {tabSelect=="stats" &&
+        <>
+          <Stats data={data} monData={monData}/>
+        </>
+      }
+      {tabSelect=="builder" &&
+        <>
+          builder goes here
+        </>
+      }
+      {tabSelect=="moves" &&
+        <>
+          moves goes here
+        </>
+      }
     </div>
   )
 }
-      /*<Forms species={speciesData} name={id}/>*/
-      /*<TypeGenderGroup typeData={data.types}type={monData.types} species={speciesData}/>*/
+      /*
+      */

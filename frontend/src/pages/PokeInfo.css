@@ -26,7 +26,10 @@
     filter: drop-shadow(8px 8px) grayscale(0%) brightness(100%);
   }
 }
-
+.poke-info h3{
+  padding: .3rem 0;
+  text-align: center;
+}
 .poke-info nav .mon-title{
   display: flex;
   align-items: center;
@@ -50,21 +53,17 @@
   flex-grow: 100;
   text-align: center;
 }
-
-
-.poke-info nav ul{
+.poke-info nav form{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   margin: 0.3rem 0;
 }
-.poke-info nav li{
+.poke-info nav label{
   width: 49.5%;
   text-align: center;
   box-shadow: 1px 1px 3px var(--shadow);
   margin: .1rem 0;
-}
-.poke-info nav label{
   padding: .3rem 0;
   display: block;
   transition: .3s;

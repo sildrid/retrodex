@@ -1,0 +1,41 @@
+.type-gender{
+  margin: .5rem 0;
+}
+.type-gender .info-type{
+  border: none;
+}
+.type-gender .info-type li{
+  border: none;
+  box-shadow: 1px 1px 3px var(--lcd-b);
+  border-radius: .5rem;
+}
+.gender-container{
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: space-evenly;
+  box-shadow: 1px 1px 3px var(--lcd-b);
+  padding: .2rem;
+  border-radius: 1rem;
+}
+.gender-container .gender-bar{
+  border-radius: 1rem;
+  width: 100%;
+  padding: .2rem;
+  display: flex;
+  justify-content: space-between;
+}
+.type-gender .egg-group{
+  display: flex;
+  justify-content: space-evenly;
+}
+.type-gender .egg-group li{
+  background-color: var(--lcd-b);
+  width: 12rem;
+  padding: .5rem 0;
+  text-align: center;
+  border-radius: .5rem;
+  box-shadow: 1px 1px 3px var(--lcd-b);
+  text-transform: capitalize;
+  color: var(--lcd-w);
+  text-shadow: none;
+}

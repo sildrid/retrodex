@@ -8,10 +8,14 @@
   color: var(--lcd-w);
 }
 .forms-list.forms-list ul{
-  padding: 0;
+  padding: .5rem 0;
   border: none;
+  display: flex;
+  overflow-x: scroll;
+  gap: .5rem;
 }
 .forms-list.forms-list li{
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -21,12 +25,36 @@
   border-radius: .5rem;
   box-shadow: 1px 1px 2px var(--lcd-b);
   border: none;
-  width: 9rem;
+  width: 10rem;
+  flex-shrink: 0;
+  height: 9rem;
+  transition: .1s;
 }
 .forms-list .form-portrait{
-  width: 5rem;
+  width: 100%;
+}
+.forms-list .form-type{
+  display: flex;
+  position: absolute;
+  width: 100%;
+  justify-content: space-evenly;
+  top: .2rem;
+}
+.forms-list .form-type h4{
+  padding: .2rem;
+  border-radius: .5rem;
+  box-shadow: 1px 1px 3px var(--shadow);
+  font-size: .7rem;
+  color: var(--reflection);
+  text-shadow: 1px 1px 2px var(--shadow);
 }
 .forms-list.forms-list h3{
+  position: absolute;
+  bottom: .2rem;
   font-size: .8rem;
   text-transform: capitalize;
+}
+.forms-list.forms-list h2{
+  text-align: center;
+  font-size: 1.3rem;
 }
