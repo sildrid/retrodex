@@ -93,7 +93,7 @@ export default function({data}){
       }
       {tabSelect=="builder" &&
         <>
-          builder goes here
+          comming soon
         </>
       }
       {tabSelect=="moves" &&

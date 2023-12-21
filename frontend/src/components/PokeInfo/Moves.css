@@ -1,0 +1,25 @@
+.info-moves{
+}
+.info-moves .info-move-list{
+  display: flex;
+  flex-wrap: wrap;
+  padding: .5rem 0;
+  gap: .5rem 0;
+  justify-content: space-evenly;
+}
+.info-moves .info-move-list li{
+  width: 48%;
+  box-shadow: 1px 1px 3px var(--shadow);
+  text-transform: capitalize;
+  padding: .3rem;
+}
+.info-moves .info-move-list h3{
+  font-size: .9rem;
+}
+.info-moves .info-move-list .acc-cat-pow{
+  display: flex;
+  justify-content: space-between;
+}
+.info-moves .info-move-list p{
+  font-size: .8rem;
+}
