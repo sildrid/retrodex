@@ -57,26 +57,34 @@ export default function({data,monData}){
     }
     return(
       <div className="weakres-wrapper">
-        <h3>Weaknesses:</h3>
-        <ul>
-          {weaknesses.map(n=>{
-            return(
-              <li>
-                <span className={n.name+"-bg"}>{n.name}</span>x{n.value}
-              </li>
-            )
-          })}
+        {!!weaknesses.length &&
+          <>
+            <h3>Weaknesses:</h3>
+            <ul>
+              {weaknesses.map(n=>{
+                return(
+                  <li>
+                    <span className={n.name+"-bg"}>{n.name}</span>x{n.value}
+                  </li>
+                )
+              })}
         </ul>
-        <h3>Resists:</h3>
-        <ul>
-          {resistances.map(n=>{
-            return(
-              <li>
-                <span className={n.name+"-bg"}>{n.name}</span>x{n.value}
-              </li>
-            )
-          })}
-        </ul>
+          </>
+        }
+        {!!resistances.length &&
+          <>
+            <h3>Resists:</h3>
+            <ul>
+              {resistances.map(n=>{
+                return(
+                  <li>
+                    <span className={n.name+"-bg"}>{n.name}</span>x{n.value}
+                  </li>
+                )
+              })}
+            </ul>
+          </>
+        }
         {!!inmunity.length &&
           <>
             <h3>Inmune To:</h3>
@@ -102,18 +110,12 @@ export default function({data,monData}){
         </p>
         <div className="stat-bar-container">
           <div
-            style={{backgroundColor:"forestgreen", width:`${Math.min(size,100)}%`}}
+            style={{backgroundColor:"forestgreen", width:`${Math.min(size,127)*100/127}%`}}
           >
-            {size>100 &&
+            {size>127 &&
               <div
-                style={{backgroundColor:"gold", width:`${Math.min(size-100,100)}%`}}
+                style={{backgroundColor:"gold", width:`${Math.min(size-127,127)*100/127}%`}}
               >
-                {size>200 &&
-                  <div
-                    style={{backgroundColor:"red", width:`${size-200}%`}}
-                  >
-                  </div>
-                }
               </div>
             }
           </div>
@@ -135,17 +137,21 @@ export default function({data,monData}){
           )
         })}
       </ul>
-      <h3>Hidden</h3>
-      <ul className="ability-list">
-        {hiddenAbilities.map(n=>{
-          return(
-            <li>
-              <h4>{n.name}</h4>
-              <p>{n.effect}</p>
-            </li>
-          )
-        })}
-      </ul>
+      {!!hiddenAbilities.length &&
+        <>
+          <h3>Hidden</h3>
+          <ul className="ability-list">
+            {hiddenAbilities.map(n=>{
+              return(
+                <li>
+                  <h4>{n.name}</h4>
+                  <p>{n.effect}</p>
+                </li>
+              )
+            })}
+          </ul>
+        </>
+      }
       <h3>Stats:</h3>
       {monData.stats &&
         <ul className="stat-list">

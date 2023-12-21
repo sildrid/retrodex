@@ -84,7 +84,7 @@ export default function(props){
 
   return(
     <>
-      <form className="dex-search-form">  
+      <form className="dex-search-form" onSubmit={(e)=>{e.preventDefault();}}>  
         <div className="search-options">
           <input
             id="search-by-pokemon"

@@ -7,6 +7,7 @@ import Stats from '../components/PokeInfo/Stats.jsx';
 import Forms from '../components/PokeInfo/Forms.jsx';
 import GenderGroup from '../components/PokeInfo/GenderGroup.jsx';
 import Evolution from '../components/PokeInfo/Evolution.jsx';
+import Moves from '../components/PokeInfo/Moves.jsx';
 
 export default function({data}){
   const navigate = useNavigate();
@@ -42,6 +43,9 @@ export default function({data}){
     setTabSelect(e.target.value);
   }
 
+  const errorImage = e=>{
+    e.target.src=`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${speciesData.id}.png`;
+  }
 
   return(
     <div className="poke-info">
@@ -55,6 +59,7 @@ export default function({data}){
             className={portraitLoaded}
             src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${monData.id}.png`}
             onLoad={()=>{setPortraitLoaded("portrait-loaded")}}
+            onError={errorImage}
           />
         }
       </div>
@@ -93,7 +98,7 @@ export default function({data}){
       }
       {tabSelect=="moves" &&
         <>
-          moves goes here
+          <Moves monData={monData} data={data}/>
         </>
       }
     </div>

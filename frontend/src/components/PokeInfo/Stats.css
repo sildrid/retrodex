@@ -45,14 +45,33 @@
 .stats-wrapper .stat-number{
   width: 3.3rem;
 }
-.stats-wrapper .stat-list div{
+.stats-wrapper .stat-bar-container{
   border-radius: 1rem;
   display: flex;
   padding: .2rem;
-  animation: fillbar .5s;
+}
+.stats-wrapper .stat-bar-container div{
+  border-radius: 1rem;
+  display: flex;
+  padding: .2rem;
+  animation: fillbar 1s;
+}
+.stats-wrapper .stat-bar-container div div{
+  animation: fillbarb 2s;
 }
 @keyframes fillbar{
   0%{
+    width:0;
+  }
+  10%{
+    width:0;
+  }
+}
+@keyframes fillbarb{
+  0%{
+    width:0;
+  }
+  45%{
     width:0;
   }
 }
