@@ -24,60 +24,138 @@ export default function({data, monData}){
     });
     return {type: foundType.name, info: moveInfo, method: n.version_group_details}
   });
-  //console.log(versionMoves)
-  console.log(moveList)
+  
+  const sorter = (a,b)=>{
+    if(a.level>b.level){
+      return true;
+    }
+    return false;
+  }
+  for(let key in versionMoves){
+    versionMoves[key].sort(sorter);
+  }
 
   const fixText = (str)=>{
     return str.replace("-"," ");
   }
 
+  const moveBox = (mv,hideInfo)=>{
+    return(
+      <div className={mv.type+"-bg move-box"}>
+        <h3>{fixText(mv.info.name)}</h3>
+        <div className="acc-cat-pow">
+          <p>acc:{mv.info.accuracy || "--"}</p>
+          <div className="move-class-image-wrapper">
+            <img src={`../${mv.info.class}.png`}/>
+          </div>
+          <p>pow:{mv.info.power || "--"}</p>
+        </div>
+        {!hideInfo &&
+        <div className="move-effect-wrapper">
+          <p>{mv.info.short_effect}</p>
+        </div>
+        }
+      </div>
+    )
+  }
   return(
     <div className="info-moves">
       <form>
-        <ul>
-        </ul>
-      </form>
-      <ul className="info-move-list">
-        {moveGen == "all" &&
-          moveList.map(n=>{
-            return(
-              <li className={n.type+"-bg"}>
-                <h3>{fixText(n.info.name)}</h3>
-                <div className="acc-cat-pow">
-                  <p>acc:{n.info.accuracy || "--"}</p>
-                  <p>{}</p>
-                  <p>pow:{n.info.power || "--"}</p>
-                </div>
-                <p>{}</p>
-                <p>{}</p>
-                <p>{}</p>
-                <p>{}</p>
-                <p>{}</p>
-                <p>{}</p>
-              </li>
-            )
+        <h4>Game:</h4>
+        <select onChange={e=>{
+            setMoveGen(e.target.value);
+          }}>
+          <option value="all">All</option>
+          {Object.keys(versionMoves).map(ver=>{
+            return <option value={ver}>{fixText(ver)}</option>
           })
-        }
-      </ul>
-      <ul>
-        {versionMoves["scarlet-violet"] && versionMoves["scarlet-violet"].map(n=>{
-          if(n.method.name=="level-up"){
-          return(
-            <li>
-              <p>{n.info.name}</p>
-              <p>{n.type}</p>
-              <p>{n.info.class}</p>
-              <p>{n.info.power}</p>
-              <p>{n.info.accuracy}</p>
-              <p>{n.info.short_effect}</p>
-            </li>
-          )
-          }else{
-            return <></>
           }
-        })
-        }
-      </ul>
+        </select>
+      </form>
+      {moveGen == "all" &&
+        <>
+          <ul className="info-move-full-list">
+            {moveList.map(n=>{
+              return(
+                <li>
+                  {moveBox(n,true)}
+                </li>
+              )
+            })}
+          </ul>
+        </>
+      }
+      {moveGen != "all" &&
+        <>
+          <h3>Lv Up Moves:</h3>
+          <ul className="info-move-list">
+            {versionMoves[moveGen].map(n=>{
+              if(n.method.name=="level-up"){
+                return(
+                  <li>
+                    <div className="lv-up-move-info">
+                      {n.level <=1 ? n.level == 0 ? "Evolve" : "Start" : `Lv ${n.level}`}
+                    </div>
+                    {moveBox(n)}
+                  </li>
+                )
+              }
+              return
+            })}
+          </ul>
+        </>
+      }
+      {moveGen != "all" &&
+        <>
+          <h3>TM/HM Moves:</h3>
+          <ul className="info-move-list">
+            {versionMoves[moveGen].map(n=>{
+              if(n.method.name=="machine"){
+                return(
+                  <li>
+                    {moveBox(n)}
+                  </li>
+                )
+              }
+              return
+            })}
+          </ul>
+        </>
+      }
+      {moveGen != "all" &&
+        <>
+          <h3>Tutor Moves:</h3>
+          <ul className="info-move-list">
+            {versionMoves[moveGen].map(n=>{
+              if(n.method.name=="tutor"){
+                return(
+                  <li>
+                    {moveBox(n)}
+                  </li>
+                )
+              }
+              return
+            })}
+          </ul>
+        </>
+      }
+      {moveGen != "all" &&
+        <>
+          <h3>Egg Moves:</h3>
+          <ul className="info-move-list">
+            {versionMoves[moveGen].map(n=>{
+              if(n.method.name=="egg"){
+                return(
+                  <li>
+                    {moveBox(n)}
+                  </li>
+                )
+              }
+              return
+            })}
+          </ul>
+        </>
+      }
     </div>
   )
 }

@@ -7,6 +7,7 @@ import Stats from '../components/PokeInfo/Stats.jsx';
 import Forms from '../components/PokeInfo/Forms.jsx';
 import GenderGroup from '../components/PokeInfo/GenderGroup.jsx';
 import Evolution from '../components/PokeInfo/Evolution.jsx';
+import Builder from '../components/PokeInfo/Builder.jsx';
 import Moves from '../components/PokeInfo/Moves.jsx';
 
 export default function({data}){
@@ -86,23 +87,9 @@ export default function({data}){
           <GenderGroup typeData={data.types}type={monData.types} species={speciesData}/>
         </>
       }
-      {tabSelect=="stats" &&
-        <>
-          <Stats data={data} monData={monData}/>
-        </>
-      }
-      {tabSelect=="builder" &&
-        <>
-          comming soon
-        </>
-      }
-      {tabSelect=="moves" &&
-        <>
-          <Moves monData={monData} data={data}/>
-        </>
-      }
+      {tabSelect=="stats" && <Stats data={data} monData={monData}/>}
+      {tabSelect=="baduilder" && <Builder monData={monData}/>}
+      {tabSelect=="moves" && <Moves monData={monData} data={data}/>}
     </div>
   )
 }
-      /*
-      */
